@@ -1,0 +1,48 @@
+<html>
+    <head>
+	<title>Kategoryzacja utworów muzycznych</title>
+        <script type="text/javascript" src="/static/jquery.js"></script>
+    </head>
+
+    <body>
+    
+    <section>
+    	<article>
+			<p>Podaj tekst piosenki do kategoryzacji:<br>
+			<textarea id="desc" rows="5" cols="50 value="" onkeypress="addResponse(event)"></textarea><br>
+			<button id="process">Kategoryzuj</button>
+			<div id="response" class="lead text-center">	</div>
+		</article>
+
+    <script>
+        function printDesc() {
+        	var description = $('#desc').val();
+
+		if (description.length > 3) {
+        	$.ajax({
+            		method : "POST",
+			url: "./api",
+            		data: JSON.stringify('claim' : description}),
+            		contentType: 'application/json'
+                	})
+		.done(funtion(data) {
+			$('#response').html("<h1>Kategoria: "+ data.result.category+");
+						$('#desc').val("");
+
+        	});
+
+    	   }
+    	}
+	   $('#process').click(function(e) {
+		printDesc()
+	});
+	   function addResponse(e){
+		if(e.which == 13 && !e.shiftKey) {
+			e.preventDefault();
+			printDesc();
+
+		}
+	}
+    </script>
+    </body>
+</html>
