@@ -1,1 +1,4 @@
-flask==1.0.2nltk==3.3sklearn==0.19.1pickle==1.0
+flask==1.0.2
+nltk==3.3
+sklearn==0.19.1
+pickle==1.0
